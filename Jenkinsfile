@@ -4,9 +4,7 @@ pipeline {
         stage("Generate Files") {
             steps {
 		//    echo "Hello world"
-		    sh "ls -lrt"
-		
-		
+		   
 		sh "git checkout origin/main"
 		  sh "chmod 755 *"
                  sh "./codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
@@ -16,11 +14,9 @@ pipeline {
         stage("Commit Generated Files") {
             steps {   
 		    // echo "Hello world"
-		 sh "touch testfile.txt"
-		    sh "git add testfile.txt"
 		    
-            //    sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
-                sh "git commit -a -m 'aifile'"
+               sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
+                sh "git commit -a -m 'aigeneratedfile'"
             }
         }
 
@@ -30,8 +26,7 @@ pipeline {
                withCredentials([gitUsernamePassword(credentialsId: 'PAT_Jenk', gitToolName: 'Default')]) {
 				
             //        sh "git pull origin main"
-		//    sh "git remote"
-		  //     sh "git branch -r"
+	
 		       sh "git push https://github.com/Sakshi-Git1/NewVersion.git HEAD:main"
                 }
             }
