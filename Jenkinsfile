@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo "Generating Java Files from ChatGPT API calls"    
         	sh "chmod 755 *"
-                sh "./codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
+                sh "./script/codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
             }
         }
 
