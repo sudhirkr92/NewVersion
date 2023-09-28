@@ -32,7 +32,7 @@ pipeline {
             //        sh "git pull origin main"
 		//    sh "git remote"
 		  //     sh "git branch -r"
-		       sh "git push origin/main HEAD:main"
+		       sh "git push NewVersion HEAD:main"
                 }
             }
 	}
