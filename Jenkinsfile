@@ -9,7 +9,7 @@ pipeline {
 		 sh "git pull origin main" 
 		sh "git checkout origin/main"
 		  sh "chmod 755 *"
-                 sh "./codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
+                 sh "codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
             }
         }
 
