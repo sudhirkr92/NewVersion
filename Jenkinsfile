@@ -32,7 +32,7 @@ pipeline {
             //        sh "git pull origin main"
 		//    sh "git remote"
 		  //     sh "git branch -r"
-		       sh "git push NewVersion HEAD:main"
+		       sh "git push https://github.com/Sakshi-Git1/NewVersion.git HEAD:main"
                 }
             }
 	}
