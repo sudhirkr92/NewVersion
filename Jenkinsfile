@@ -16,7 +16,7 @@ pipeline {
 		    // echo "Hello world"
 		sh   "touch demo1/src/main/java/com/example/demo/Demo1Application.java"
                sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
-                sh "git commit -m 'aigeneratedfile'"
+                sh "git commit -m 'aigeneratedfile' || echo 'Commit failed. There is probably nothing to commit.'"
             }
         }
 
