@@ -28,7 +28,8 @@ pipeline {
                withCredentials([gitUsernamePassword(credentialsId: 'PAT_Jenk', gitToolName: 'Default')]) {
 				
             //        sh "git pull origin main"
-		       
+		    sh "git remote"
+		       sh "git branch -r"
 		       sh "git push -u origin main"
                 }
             }
