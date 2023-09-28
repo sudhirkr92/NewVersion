@@ -14,7 +14,7 @@ pipeline {
         stage("Commit Generated Files") {
             steps {   
 		    // echo "Hello world"
-		sh   "touch demo1/src/main/java/com/example/demo/Demo1Application.java"
+		// sh   "touch demo1/src/main/java/com/example/demo/Demo1Application.java"
                sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
                 sh "git commit -m 'aigeneratedfile' || echo 'Commit failed. There is probably nothing to commit.'"
             }
@@ -36,7 +36,7 @@ pipeline {
             steps {
 		    echo "Hello world"
             //    sh "cd ./demo1 & docker build -t sakshidocker12/hackathon_23 ."
-		 sh "./demo1/docker build -t sakshidocker12/hackathon_23 ."
+		 sh " cd demo1 & docker build -t sakshidocker12/hackathon_23 ."
             }
         } 
        stage('Push Docker image') {
