@@ -5,7 +5,7 @@ pipeline {
             steps {
 		//    echo "Hello world"
 		    sh "ls -lrt"
-		//    sh "rm ."
+		sh "rm *.*"
 		 sh "git pull origin main" 
 		sh "git checkout origin/main"
 		  sh "chmod 755 *"
