@@ -14,7 +14,7 @@ pipeline {
         stage("Commit Generated Files") {
             steps {   
 		    // echo "Hello world"
-		    
+		sh   "touch demo1/src/main/java/com/example/demo/Demo1Application.java"
                sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
                 sh "git commit -m 'aigeneratedfile'"
             }
