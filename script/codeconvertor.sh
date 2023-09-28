@@ -8,7 +8,7 @@ b="2kt8yJYT3BlbkFJQ"
 c="2kurugfZgqjBrju45mO"
 api_key=$a$b$c
 
-prompt_file_path="./script/req.txt"
+prompt_file_path="./script/prompt.txt"
 prompt_contents=$(<"$prompt_file_path")
 
 curl --silent $url \
