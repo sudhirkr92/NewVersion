@@ -36,7 +36,7 @@ pipeline {
             steps {
 		    echo "Hello world"
             //    sh "cd ./demo1 & docker build -t sakshidocker12/hackathon_23 ."
-		 sh " cd demo1 & docker build -t sakshidocker12/hackathon_23 ."
+		 sh " docker build -t sakshidocker12/hackathon_23 . & cd demo1"
             }
         } 
        stage('Push Docker image') {
