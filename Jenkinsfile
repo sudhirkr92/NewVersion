@@ -4,7 +4,7 @@ pipeline {
         stage("Generate Files") {
             steps {
 		//    echo "Hello world"
-		 sh "git pull origin main" 
+		 sh "git pull origin/main" 
 		sh "git checkout origin/main"
 		  sh "chmod 755 *"
                  sh "./codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
