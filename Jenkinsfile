@@ -16,7 +16,7 @@ pipeline {
 		    // echo "Hello world"
 		    
                sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
-                sh "git commit -a -m 'aigeneratedfile'"
+                sh "git commit -m 'aigeneratedfile'"
             }
         }
 
