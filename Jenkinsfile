@@ -45,7 +45,7 @@ pipeline {
             }
             steps {
 		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
-		 sh "docker push sudhirkr92/hackthon-23:latest"  
+		 sh "docker push sakshidocker12/hackathon_23:latest"  
 		 sh "docker logout"  
             }
         }
