@@ -7,12 +7,16 @@ a="sk-ZUWiA4g2eg45J"
 b="2kt8yJYT3BlbkFJQ"
 c="2kurugfZgqjBrju45mO"
 api_key=$a$b$c
+
+prompt_file_path="./script/req.txt"
+prompt_contents=$(<"$prompt_file_path")
+
 curl --silent $url \
 		-H "Authorization: Bearer $api_key" \
 		-H "Content-Type: application/json" \
 		-d "{
 		     \"model\": \"gpt-3.5-turbo\",
-	    	     \"messages\": [{\"role\": \"user\", \"content\": \"please convert below c# programs into java\n$1\"}],
+	    	     \"messages\": [{\"role\": \"user\", \"content\": \"$prompt_contents\n$1\"}],
 		     \"temperature\": 0.7
 	            }" \
 		|awk -F\" '
