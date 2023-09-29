@@ -5,7 +5,7 @@ public class Main {
  Javalin app = Javalin.create().start(8080);
  
  app.get("/", ctx -> {
- ctx.result("Hello World from C#!");
+ ctx.result("Hello World from Java!");
  });
  }
 }
