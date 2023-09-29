@@ -4,7 +4,8 @@ pipeline {
         stage("Generate Files") {
             steps {
                 echo "Generating Java Files from ChatGPT API calls"    
-        	sh "chmod 755 *"
+		sh "chmod 755 *"
+        	sh "chmod 755 /script/codeconvertor.sh"
                 sh "./script/codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
             }
         }
