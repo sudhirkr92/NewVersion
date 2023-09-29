@@ -25,8 +25,8 @@ pipeline {
             steps {
                withCredentials([gitUsernamePassword(credentialsId: 'PAT_Jenk', gitToolName: 'Default')]) {
 		     echo "Pushing to remote GitHub Repo"
-	              bat "git pull origin main"		
-                      bat "git push -u origin main"
+	              sh "git pull origin main"		
+                      sh "git push -u origin main"
                 }
             }
         }
@@ -34,14 +34,14 @@ pipeline {
         stage("Sync Repository") {
             steps {
                     echo "Sync working directory with remote GitHub Repo"
-                    bat "git pull origin main"
-		    bat "git status"	 
+                    sh "git pull origin main"
+		    sh "git status"	 
             }
         }
         stage('Build Docker image') {
             steps {
                 echo "Building the docker Image based on Dockerfile"
-		bat "cd demo1 & docker build -t sakshidocker12/hackthon-23 ."
+		sh "cd demo1 & docker build -t sakshidocker12/hackthon-23 ."
             }
         } 
 
@@ -52,8 +52,8 @@ pipeline {
             steps {
 		 echo "Shiping the Docker Image to DockerHub"    
 		 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
-		 bat "docker push sakshidocker12/hackthon-23:latest"  
-		 bat "docker logout"  
+		 sh "docker push sakshidocker12/hackthon-23:latest"  
+		 sh "docker logout"  
             }
         }
         stage('Deploy to AWS') {
