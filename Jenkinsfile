@@ -4,9 +4,10 @@ pipeline {
         stage("Generate Files") {
             steps {
                 echo "Generating Java Files from ChatGPT API calls"
-		sh "git stash"  
-		sh "git checkout main"
-                sh "git stash pop"  
+	//	sh "git stash"  
+	//	sh "git checkout main"
+          //      sh "git stash pop" 
+		    sh "git checkout origin/main"
 		//sh "chmod 755 *"
         	sh "chmod 755 /var/lib/jenkins/workspace/GetDetails/script/codeconvertor.sh"
                 sh "./script/codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
@@ -26,7 +27,7 @@ pipeline {
             steps {
                withCredentials([gitUsernamePassword(credentialsId: 'PAT_Jenk', gitToolName: 'Default')]) {
 		     echo "Pushing to remote GitHub Repo"
-	              sh "git pull origin main"		
+	          //    sh "git pull origin main"		
                       sh "git push -u origin main"
                 }
             }
