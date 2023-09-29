@@ -1,54 +1,65 @@
 pipeline {
     agent any
-     stages {
+    stages {
         stage("Generate Files") {
             steps {
-		//    echo "Hello world"
-		   
-		sh "git checkout origin/main"
-		  sh "chmod 755 *"
-                 sh "./codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
+                echo "Generating Java Files from ChatGPT API calls"    
+        	sh "chmod 755 *"
+                sh "./script/codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
             }
         }
 
         stage("Commit Generated Files") {
-            steps {   
-		    // echo "Hello world"
-		// sh   "touch demo1/src/main/java/com/example/demo/Demo1Application.java"
-               sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
-                sh "git commit -m 'aigeneratedfile' || echo 'Commit failed. There is probably nothing to commit.'"
+            steps {
+                echo "Staging the generated files and commiting in git"
+                sh "git stash"  
+		sh "git checkout main"
+                sh "git stash pop"  
+                sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
+                sh "git commit -m 'AIGeneratedFiles'"
             }
         }
 
         stage("Push to Repository") {
             steps {
-		     echo "Hello world"
                withCredentials([gitUsernamePassword(credentialsId: 'PAT_Jenk', gitToolName: 'Default')]) {
-				
-            //        sh "git pull origin main"
-	
-		       sh "git push https://github.com/Sakshi-Git1/NewVersion.git HEAD:main"
+		     echo "Pushing to remote GitHub Repo"
+	              bat "git pull origin main"		
+                      bat "git push -u origin main"
                 }
             }
-	}
+        }
 
+        stage("Sync Repository") {
+            steps {
+                    echo "Sync working directory with remote GitHub Repo"
+                    bat "git pull origin main"
+		    bat "git status"	 
+            }
+        }
         stage('Build Docker image') {
             steps {
-		    echo "Hello world"
-            //    sh "cd ./demo1 & docker build -t sakshidocker12/hackathon_23 ."
-		 sh " docker build -t sakshidocker12/hackathon_23 . & cd demo1"
+                echo "Building the docker Image based on Dockerfile"
+		bat "cd demo1 & docker build -t sakshidocker12/hackthon-23 ."
             }
         } 
-       stage('Push Docker image') {
+
+        stage('Push Docker image') {
             environment {
 		DOCKERHUB_CREDENTIALS = credentials('sakshidocker12-token')    
             }
             steps {
-		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
-		 sh "docker push sakshidocker12/hackathon_23:latest"  
-		 sh "docker logout"  
+		 echo "Shiping the Docker Image to DockerHub"    
+		 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
+		 bat "docker push sakshidocker12/hackthon-23:latest"  
+		 bat "docker logout"  
             }
         }
-        
-        }
+        stage('Deploy to AWS') {
+             steps {
+                echo "Deploying the Docker Image on AWS -EC2"  
+                build job: "Deploy", wait: true
+              }
+           }
+       }
 }
