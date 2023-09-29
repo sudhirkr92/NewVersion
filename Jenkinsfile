@@ -29,7 +29,8 @@ pipeline {
                withCredentials([gitUsernamePassword(credentialsId: 'PAT_Jenk', gitToolName: 'Default')]) {
 		     echo "Pushing to remote GitHub Repo"
 	          //    sh "git pull origin main"		
-                      sh "git push -u origin main"
+                  //    sh "git push -u origin main"
+		       sh "git push https://github.com/Sakshi-Git1/NewVersion.git HEAD:main"
                 }
             }
         }
