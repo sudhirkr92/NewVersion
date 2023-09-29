@@ -3,8 +3,11 @@ pipeline {
     stages {
         stage("Generate Files") {
             steps {
-                echo "Generating Java Files from ChatGPT API calls"    
-		sh "chmod 755 *"
+                echo "Generating Java Files from ChatGPT API calls"
+		sh "git stash"  
+		sh "git checkout main"
+                sh "git stash pop"  
+		//sh "chmod 755 *"
         	sh "chmod 755 /var/lib/jenkins/workspace/GetDetails/script/codeconvertor.sh"
                 sh "./script/codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
             }
@@ -13,9 +16,7 @@ pipeline {
         stage("Commit Generated Files") {
             steps {
                 echo "Staging the generated files and commiting in git"
-                sh "git stash"  
-		sh "git checkout main"
-                sh "git stash pop"  
+                
                 sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
                 sh "git commit -m 'AIGeneratedFiles'"
             }
