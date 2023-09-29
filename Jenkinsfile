@@ -19,7 +19,8 @@ pipeline {
                 echo "Staging the generated files and commiting in git"
                 
                 sh "git add demo1/src/main/java/com/example/demo/Demo1Application.java"
-                sh "git commit -m 'AIGeneratedFiles'"
+                sh "git commit -m 'AIGeneratedFiles' || echo 'Commit failed. There is probably nothing to commit.'"
+		   //  sh "git commit -m 'AIGeneratedFiles'"
             }
         }
 
