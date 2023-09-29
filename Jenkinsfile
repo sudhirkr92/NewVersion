@@ -9,7 +9,7 @@ pipeline {
           //      sh "git stash pop" 
 		    sh "git checkout origin/main"
 		sh "chmod 755 *"
-        	sh "chmod 755 /var/lib/jenkins/workspace/GetDetails/script/codeconvertor.sh"
+        	//sh "chmod 755 /var/lib/jenkins/workspace/GetDetails/script/codeconvertor.sh"
                 sh "./script/codeconvertor.sh WebApplication2/WebApplication2/Program.cs"
             }
         }
