@@ -47,7 +47,7 @@
 		<dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>
-            <version>5.2.0</version>
+            <version>4.6.8</version>
         </dependency>
 	</dependencies>
 
