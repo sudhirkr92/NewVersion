@@ -46,7 +46,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo "Building the docker Image based on Dockerfile"
-		sh "cd demo1 & chmod a+rw . & dos2unix mvnw & docker build -t sakshidocker12/hackthon-23 ."
+		bat "cd demo1 & dos2unix mvnw & docker build -t sakshidocker12/hackthon-23 ."
             }
         } 
 
@@ -56,9 +56,9 @@ pipeline {
             }
             steps {
 		 echo "Shiping the Docker Image to DockerHub"    
-		 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
-		 sh "docker push sakshidocker12/hackthon-23:latest"  
-		 sh "docker logout"  
+		 bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
+		 bat "docker push sakshidocker12/hackthon-23:latest"  
+		 bat "docker logout"  
             }
         }
         stage('Deploy to AWS') {
