@@ -46,25 +46,25 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo "Building the docker Image based on Dockerfile"
-		bat "cd demo1 & dos2unix mvnw & docker build -t sakshidocker12/hackthon-23 ."
+		bat "cd demo1 & dos2unix mvnw & docker build -t sudhirkr92/hackthon-23-team1 ."
             }
         } 
 
         stage('Push Docker image') {
             environment {
-		DOCKERHUB_CREDENTIALS = credentials('sakshidocker12-token')    
+		DOCKERHUB_CREDENTIALS = credentials('sudhirkr92-dockerhub-token')    
             }
             steps {
 		 echo "Shiping the Docker Image to DockerHub"    
-		 bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
-		 bat "docker push sakshidocker12/hackthon-23:latest"  
+		 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'    
+		 bat "docker push sudhirkr92/hackthon-23-team1:latest"  
 		 bat "docker logout"  
             }
         }
         stage('Deploy to AWS') {
              steps {
                 echo "Deploying the Docker Image on AWS -EC2"  
-                //build job: "Deploy", wait: true
+               // build job: "Deploy", wait: true
               }
            }
        }
