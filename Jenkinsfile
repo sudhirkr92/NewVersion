@@ -46,7 +46,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo "Building the docker Image based on Dockerfile"
-		bat "cd demo1 & dos2unix mvnw & docker build -t sudhirkr92/hackthon-23-team1 ."
+		bat "cd demo1 & dos2unix mvnw & mvnw dependency:go-offline & mvnw clean install & docker build -t sudhirkr92/hackthon-23-team1 ."
             }
         } 
 
